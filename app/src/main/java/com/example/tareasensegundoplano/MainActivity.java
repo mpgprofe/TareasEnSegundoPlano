@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     Thread hilo = null;
     boolean hiloActivo = true;
     int contador = 0;
+    boolean hiloaActivo2 = true;
+    int contador2 = 0;
 
 
     @Override
@@ -72,8 +74,14 @@ public class MainActivity extends AppCompatActivity {
         buttonStart2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MiCronometro miCronometro = new MiCronometro(0, crono2);
+                MiCronometro miCronometro = new MiCronometro(contador2, crono2);
                 miCronometro.execute();
+            }
+        });
+        buttonStop2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hiloaActivo2=false;
             }
         });
     }
@@ -94,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            while(true){
+            while(hiloaActivo2)
+            {
                 int segundos = contador % 60;
                 int minutos =  contador /60;
                 String textoCrono = minutos+":"+segundos;
